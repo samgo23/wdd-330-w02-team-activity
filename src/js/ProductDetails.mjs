@@ -1,5 +1,4 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
-import find from "./ProductData.mjs";
 
 function productDetailsHTML(product){
    return `<h3>${product.Brand["Name"]}</h3>
