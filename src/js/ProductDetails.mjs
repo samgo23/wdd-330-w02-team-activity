@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import find from "./ProductData.mjs";
 
 function productDetailsHTML(product){
    return `<h3>${product.Brand["Name"]}</h3>
@@ -33,7 +34,7 @@ export default class ProductDetails {
 
     async init(){
 // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
-    this.product = await this.dataSource.findProductByID(this.productId);
+    this.product = await this.dataSource.findProductById(this.productId);
   // once we have the product details we can render out the HTML
     this.renderProductDetails(".product-detail");
   // once the HTML is rendered we can add a listener to Add to Cart button
