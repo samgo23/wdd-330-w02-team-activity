@@ -1,4 +1,9 @@
-import { getLocalStorage } from "./utils.mjs";
+import { qs, getLocalStorage } from "./utils.mjs";
+
+
+
+renderCartContents();
+onCartPageLoad();
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -6,8 +11,10 @@ function renderCartContents() {
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
+
 function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
+  const newItem = `
+  <li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -25,4 +32,24 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-renderCartContents();
+function onCartPageLoad() {
+  // Get cart items from local storage
+  let cartItems = getLocalStorage("so-cart");
+  
+  // Check if there are any items in the cart
+  if (cartItems && cartItems.length > 0) {
+    // Show the cart footer element
+    qs(".cart-footer").classList.remove("hide");
+
+    // Calculate total of cart items
+    let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
+
+    // Create HTML to display total
+    let totalHTML = `<p class="cart-total">Total: $${total}</p>`;
+
+    // Insert HTML into element
+    qs(".cart-footer").innerHTML = totalHTML;
+  }
+}
+
+

@@ -201,6 +201,11 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+/*cart total*/
+
+.hide {
+  display: none;
+}
 
 @media screen and (min-width: 500px) {
   body {
