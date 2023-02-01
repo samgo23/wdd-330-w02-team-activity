@@ -11,7 +11,7 @@ function productDetailsHTML(product){
       alt="${product.NameWithoutBrand}"
     />
 
-    <p class="product-card__price">"${product.FinalPrice}"</p>
+    <p class="product-card__price">${product.FinalPrice}</p>
 
     <p class="product__color">${product.Colors.ColorName}</p>
 
@@ -20,7 +20,7 @@ function productDetailsHTML(product){
     </p>
 
     <div class="product-detail__add">
-      <button id="addToCart" data-id="${product.Id}">"Add to Cart"</button>
+      <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
     </div>`;
 }
 
