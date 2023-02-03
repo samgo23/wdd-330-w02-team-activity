@@ -1,3 +1,5 @@
+import { renderListWithTemplate } from "./utils.mjs";
+
 function productCardTemplate(product) {
     return `<li class="product-card">
     <a href="product_pages/index.html?product=${product.Id}">
@@ -18,14 +20,21 @@ export default class ProductList{
         this.listElement = listElement;
     }
 
-    renderList(list) {
-        const htmlStrings = list.map(prod => productCardTemplate(prod));
-        this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+    // Filter list of products to select the 4 tents needed:
+    filterByTentsId(list) {
+      //"344YJ" "880RR" "985PR" "989CG"
+      const filteredList = list.filter(prod => prod.Id == "344YJ" || prod.Id == "880RR" 
+      ||  prod.Id == "985PR" || prod.Id == "989CG");
+      return filteredList
     }
+
     async init() {
         // our dataSource will return a Promise...so we can use await to resolve it.
         const list = await this.dataSource.getData();
+
+        const filteredList = this.filterByTentsId(list);
         // render the list
-       this.renderList(list);
+       renderListWithTemplate(productCardTemplate, this.listElement, filteredList, "afterbegin");
       }
+
 }
