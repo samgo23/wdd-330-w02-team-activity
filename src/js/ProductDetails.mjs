@@ -7,7 +7,7 @@ function productDetailsHTML(product){
 
     <img
       class="divider"
-      src="${product.Images.PrimarySmall}"
+      src="${product.Images.PrimaryMedium}"
       alt="${product.NameWithoutBrand}"
     />
 
