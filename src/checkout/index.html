@@ -43,9 +43,29 @@
         <label for="securityCode">Security Code</label>
         <input type="number" name="securityCode" id="securityCode" required>
 
-        <section class="orderSummary">
+        <fieldset class="orderSummary">
+          <legend>Order Summary</legend>
+          
+          <ul>
+            <li>
+              <label for="cartSubtotal">Item Subtotal(<span id="num-items"></span>)</label>
+              <p name="cartSubtotal" id="cartSubtotal"></p>
+            </li>
+            <li>
+              <label for="shipping">Shipping Estimate</label>
+              <p id="shipping"></p>
+            </li>
+            <li>
+              <label for="tax">Tax</label>
+              <p id="tax"></p>
+            </li>
+            <li>
+              <label for="orderTotal"><b>Order Total</b></label>
+              <p id="orderTotal"></p>
+            </li>
+          </ul>
         
-        </section>
+        </fieldset>
 
         <input type="submit" value="Checkout">
       </form>
