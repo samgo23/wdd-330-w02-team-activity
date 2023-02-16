@@ -31,6 +31,7 @@ export default class ShoppingCart {
     if (cartItems != null) {
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
       document.querySelector(this.selector).innerHTML = htmlItems.join("");
+      onCartPageLoad();
     } else {
       let div = document.createElement("div");
       let p = document.createElement("p");
@@ -43,3 +44,17 @@ export default class ShoppingCart {
     }
   }
 }
+
+function onCartPageLoad() {
+  // Get cart items from local storage
+  let cartItems = getLocalStorage("so-cart");
+
+    // Show the cart footer element
+    qs(".cart-footer").classList.remove("hide");
+    
+    // Calculate total of cart items
+    let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
+
+    // Create HTML to display total
+    let totalHTML = `<p class="cart-total">Total: $${total}</p>`;
+  }
