@@ -40,3 +40,51 @@ export function getParam(param){
   return product;
 }
 
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  
+  const htmlStrings = list.map(templateFn);
+
+  // if clear is true we need to clear out the contents of the parent.
+  if (clear == true) {
+    parentElement.innerHTML = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+
+  parentElement.insertAdjacentHTML("afterbegin", template); 
+  
+  //if there is a callback...call it and pass data
+  if(callback) {
+    callback(data);
+  }
+}
+
+async function loadTemplate(path) {
+
+  const response = await fetch(path);
+
+  if (response.ok) { // if HTTP-status is 200-299 get the response body
+    const template = await response.text();
+    return template;
+  } else {
+    alert("HTTP-Error: " + response.status);
+  }
+}
+
+// Function that dynamically loads the header and footer into a page:
+export async function loadHeaderFooter() {
+  // Set paths:
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+
+  // Grab header & footer elements out of the DOM:
+  const headerElement = document.querySelector("#main-header");
+  const footerElement = document.querySelector("#main-footer");
+
+  // Render the header & footer:
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
+
+}
