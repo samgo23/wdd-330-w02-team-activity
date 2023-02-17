@@ -7,13 +7,13 @@ function productDetailsHTML(product){
 
     <img
       class="divider"
-      src="${product.Images.PrimaryMedium}"
+      src="${product.Images.PrimaryLarge}"
       alt="${product.NameWithoutBrand}"
     />
 
     <p class="product-card__price">$${product.FinalPrice}</p>
 
-    <p class="product__color">${product.Colors.ColorName}</p>
+    <p class="product__color">${product.Colors[0].ColorName}</p>
 
     <p class="product__description">
     ${product.DescriptionHtmlSimple}
