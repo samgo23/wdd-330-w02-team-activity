@@ -63,11 +63,12 @@ function onCartPageLoad() {
   let cartItems = getLocalStorage("so-cart");
 
     // Show the cart footer element
-    qs(".cart-footer").classList.remove("hide");
+    document.querySelector(".cart-footer").classList.remove("hide");
     
     // Calculate total of cart items
     let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
 
     // Create HTML to display total
     let totalHTML = `<p class="cart-total">Total: $${total}</p>`;
+    document.querySelector(".cart-footer").innerHTML += totalHTML;
   }
