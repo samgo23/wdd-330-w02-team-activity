@@ -1,9 +1,9 @@
 import { getLocalStorage } from "./utils.mjs";
 
-const productList = document.querySelector('.product-list');
+const productList = document.querySelector(".product-list");
 
-productList.addEventListener('click', (event) => {
-  if (event.target.matches('.remove-item')) {
+productList.addEventListener("click", (event) => {
+  if (event.target.matches(".remove-item")) {
     const itemId = event.target.dataset.id;
     const cartItems = getLocalStorage("so-cart");
     const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
