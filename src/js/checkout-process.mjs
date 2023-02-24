@@ -1,9 +1,9 @@
-import {renderCartContents} from "/js/ShoppingCart.js";
+import { getLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 
 const services = new ExternalServices();
-function formDataToJSON(from) {
+function formDataToJSON(form) {
     const formData = new FormData(form),
     convertedJSON = {};
 
@@ -45,15 +45,13 @@ constructor(key, outputSelector){
 
     calculateItemSummary(){
         // calculate and display the total amount of the items in the cart, and the number of items.
-        let cartSubtotal = document.querySelector(
-            this.outputSelector + '#cartSubtotal'
-            );
-        let cartItems = document.querySelector(
-            this.outputSelector + '#num-items'
-            );
-
-        let amount = this.list.map((item) => item.FinalPrice);
-        this.itemTotal = amounts.reduce((sum, item) => sum, item);
+        let summaryElement = document.querySelector('#cartSubtotal'
+        );
+        const itemNumElement = document.querySelector("#num-items"
+        );
+        itemNumElement.innerText = this.list.length;
+        let amounts = this.list.map((item) => item.FinalPrice);
+        this.itemTotal = amounts.reduce((sum, item) => sum + item);
         summaryElement.innerText = '$' + this.itemTotal;
     }
 
@@ -83,10 +81,10 @@ constructor(key, outputSelector){
         orderTotal.innerText = "$" + this.orderTotal;
 
     }
-    async checkout(form) {
+    async checkout() {
         const formElement = document.forms["checkout"];
     
-        const json = formDataToJSON(form);
+        const json = formDataToJSON(formElement);
         // add totals, and item details
         json.orderDate = new Date();
         json.orderTotal = this.orderTotal;

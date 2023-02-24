@@ -34,8 +34,9 @@ export default class ShoppingCart {
     if (cartItems != null) {
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
       document.querySelector(this.selector).innerHTML = htmlItems.join("");
+      document.querySelector(".list-total").innerText += ` $${this.total}`;
       this.changeQuantity();
-      onCartPageLoad();
+      // onCartPageLoad();
     } else {
       let div = document.createElement("div");
       let p = document.createElement("p");
@@ -68,28 +69,28 @@ export default class ShoppingCart {
         const cartItems = getLocalStorage("so-cart");
         const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
         localStorage.setItem("so-cart", JSON.stringify(updatedCartItems));
-        renderCartContents();
+        // renderCartContents();
     }
   });
   }
   
 }
-function onCartPageLoad() {
-  // Get cart items from local storage
-  let cartItems = getLocalStorage("so-cart");
+// // function onCartPageLoad() {
+//   // Get cart items from local storage
+//   let cartItems = getLocalStorage("so-cart");
   
-  // Check if there are any items in the cart
-  if (cartItems && cartItems.length > 0) {
-    // Show the cart footer element
-    qs(".cart-footer").classList.remove("hide");
+//   // Check if there are any items in the cart
+//   if (cartItems && cartItems.length > 0) {
+//     // Show the cart footer element
+//     qs(".cart-footer").classList.remove("hide");
 
-    // Calculate total of cart items
-    let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
+//     // Calculate total of cart items
+//     let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
 
-    // Create HTML to display total
-    let totalHTML = `<p class="cart-total">Total: $${total}</p>`;
+//     // Create HTML to display total
+//     let totalHTML = `<p class="cart-total">Total: $${total}</p>`;
 
-    // Insert HTML into element
-    qs(".cart-footer").innerHTML = totalHTML;
-  }
-}
+//     // Insert HTML into element
+//     qs(".cart-footer").innerHTML = totalHTML;
+//   }
+// }
