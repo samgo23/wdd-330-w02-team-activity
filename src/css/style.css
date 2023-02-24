@@ -207,6 +207,7 @@ button {
   grid-column: 3;
 }
 
+/* Category Grid in Home Page */
 .category-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

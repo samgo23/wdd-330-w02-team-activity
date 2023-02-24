@@ -1,9 +1,9 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-const productList = document.querySelector('.product-list');
+const productList = document.querySelector(".product-list");
 
-productList.addEventListener('click', (event) => {
-  if (event.target.matches('.remove-item')) {
+productList.addEventListener("click", (event) => {
+  if (event.target.matches(".remove-item")) {
     const itemId = event.target.dataset.id;
     const cartItems = getLocalStorage("so-cart");
     const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
@@ -69,3 +69,18 @@ export default class ShoppingCart {
     });
   }
 }
+
+function onCartPageLoad() {
+  // Get cart items from local storage
+  let cartItems = getLocalStorage("so-cart");
+
+    // Show the cart footer element
+    document.querySelector(".cart-footer").classList.remove("hide");
+    
+    // Calculate total of cart items
+    let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
+
+    // Create HTML to display total
+    let totalHTML = `<p class="cart-total">Total: $${total}</p>`;
+    document.querySelector(".cart-footer").innerHTML += totalHTML;
+  }
