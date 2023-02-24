@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { qs, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 const productList = document.querySelector(".product-list");
 
@@ -69,18 +69,22 @@ export default class ShoppingCart {
     });
   }
 }
-
 function onCartPageLoad() {
   // Get cart items from local storage
   let cartItems = getLocalStorage("so-cart");
-
+  
+  // Check if there are any items in the cart
+  if (cartItems && cartItems.length > 0) {
     // Show the cart footer element
-    document.querySelector(".cart-footer").classList.remove("hide");
-    
+    qs(".cart-footer").classList.remove("hide");
+
     // Calculate total of cart items
     let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
 
     // Create HTML to display total
     let totalHTML = `<p class="cart-total">Total: $${total}</p>`;
-    document.querySelector(".cart-footer").innerHTML += totalHTML;
+
+    // Insert HTML into element
+    qs(".cart-footer").innerHTML = totalHTML;
   }
+}
