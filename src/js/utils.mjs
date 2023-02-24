@@ -74,11 +74,10 @@ async function loadTemplate(path) {
 }
 
 // Function that dynamically loads the header and footer into a page:
-export async function loadHeaderFooter() {
+    export async function loadHeaderFooter() {
   // Set paths:
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
-
   // Grab header & footer elements out of the DOM:
   const headerElement = document.querySelector("#main-header");
   const footerElement = document.querySelector("#main-footer");
@@ -86,5 +85,23 @@ export async function loadHeaderFooter() {
   // Render the header & footer:
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+  cartSuperscript();
+}
 
+// add a superscript numebr over the backpack icon to show how many items are in the cart
+function cartSuperscript() {
+  // Retrieve the value saved in the 'so-cart' key of the local storage
+  const cartValue = localStorage.getItem('so-cart');
+
+  // Convert the retrieved value to an array of objects
+  const cartArray = JSON.parse(cartValue);
+
+  // Get the length of the array to determine the number of items in the cart
+  const numInCart = cartArray.length;
+
+  // Find the HTML element with the id 'numberInCart'
+  const numInCartElement = document.getElementById('numberInCart');
+
+  // Set the innerHTML of the element to the value retrieved from local storage
+  numInCartElement.innerHTML = numInCart;
 }
