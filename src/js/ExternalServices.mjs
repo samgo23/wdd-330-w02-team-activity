@@ -4,7 +4,7 @@ function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
-    throw { name: 'servicesError', message: res };;
+    throw { name: 'servicesError', message: res };
   }
 }
 
