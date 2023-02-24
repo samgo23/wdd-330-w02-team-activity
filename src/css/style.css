@@ -227,6 +227,18 @@ button {
   }
 }
 
+#numberInCart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+
 footer {
   font-size: var(--small-font);
   padding: 1em;

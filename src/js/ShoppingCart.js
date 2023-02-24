@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 const productList = document.querySelector(".product-list");
 
@@ -24,7 +24,7 @@ function cartItemTemplate(item) {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
+    <p class="cart-card__quantity">Quantity: <input min=1 type="number" value="${item.Quantity}" class="cart-quantity-input"></p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
     <span class="remove-item" data-id="${item.Id}">X</span>
   </li>`;
@@ -44,7 +44,7 @@ export default class ShoppingCart {
     if (cartItems != null) {
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
       document.querySelector(this.selector).innerHTML = htmlItems.join("");
-      onCartPageLoad();
+      this.changeQuantity();
     } else {
       let div = document.createElement("div");
       let p = document.createElement("p");
@@ -55,6 +55,18 @@ export default class ShoppingCart {
         .querySelector(".products")
         .insertBefore(div, document.querySelector(this.selector));
     }
+  }
+// changes shopping cart item quantities
+  changeQuantity() {
+    const inputElements = document.querySelectorAll(".cart-quantity-input");
+    inputElements.forEach((input, index) => {
+      input.addEventListener("change", (event) => {
+        const newQuantity = event.target.value;
+        const cartItems = getLocalStorage(this.key);
+        cartItems[index].Quantity = newQuantity;
+        setLocalStorage(this.key, cartItems);
+      });
+    });
   }
 }
 
