@@ -9,10 +9,18 @@ export function qs(selector, parent = document) {
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
-// save data to local storage
 export function setLocalStorage(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
+  let jsonData;
+  try {
+    jsonData = JSON.stringify(data);
+  } catch (e) {
+    console.error(`Error parsing data to JSON: ${e}`);
+    return;
+  }
+  localStorage.setItem(key, jsonData);
 }
+
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -32,3 +40,68 @@ export function getParam(param){
   return product;
 }
 
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  
+  const htmlStrings = list.map(templateFn);
+
+  // if clear is true we need to clear out the contents of the parent.
+  if (clear == true) {
+    parentElement.innerHTML = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+
+  parentElement.insertAdjacentHTML("afterbegin", template); 
+  
+  //if there is a callback...call it and pass data
+  if(callback) {
+    callback(data);
+  }
+}
+
+async function loadTemplate(path) {
+
+  const response = await fetch(path);
+
+  if (response.ok) { // if HTTP-status is 200-299 get the response body
+    const template = await response.text();
+    return template;
+  } else {
+    alert("HTTP-Error: " + response.status);
+  }
+}
+
+// Function that dynamically loads the header and footer into a page:
+    export async function loadHeaderFooter() {
+  // Set paths:
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+  // Grab header & footer elements out of the DOM:
+  const headerElement = document.querySelector("#main-header");
+  const footerElement = document.querySelector("#main-footer");
+
+  // Render the header & footer:
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
+  cartSuperscript();
+}
+
+// add a superscript numebr over the backpack icon to show how many items are in the cart
+function cartSuperscript() {
+  // Retrieve the value saved in the 'so-cart' key of the local storage
+  const cartValue = localStorage.getItem('so-cart');
+
+  // Convert the retrieved value to an array of objects
+  const cartArray = JSON.parse(cartValue);
+
+  // Get the length of the array to determine the number of items in the cart
+  const numInCart = cartArray.length;
+
+  // Find the HTML element with the id 'numberInCart'
+  const numInCartElement = document.getElementById('numberInCart');
+
+  // Set the innerHTML of the element to the value retrieved from local storage
+  numInCartElement.innerHTML = numInCart;
+}
