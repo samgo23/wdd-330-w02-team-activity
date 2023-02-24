@@ -1,16 +1,6 @@
 import { qs, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-const productList = document.querySelector(".product-list");
 
-productList.addEventListener("click", (event) => {
-  if (event.target.matches(".remove-item")) {
-    const itemId = event.target.dataset.id;
-    const cartItems = getLocalStorage("so-cart");
-    const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
-    localStorage.setItem("so-cart", JSON.stringify(updatedCartItems));
-    renderCartContents();
-  }
-});
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
@@ -45,6 +35,7 @@ export default class ShoppingCart {
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
       document.querySelector(this.selector).innerHTML = htmlItems.join("");
       this.changeQuantity();
+      onCartPageLoad();
     } else {
       let div = document.createElement("div");
       let p = document.createElement("p");
@@ -68,6 +59,20 @@ export default class ShoppingCart {
       });
     });
   }
+
+  removeFromCart() {
+    const productList = document.querySelector(".product-list");
+    productList.addEventListener("click", (event) => {
+      if (event.target.matches(".remove-item")) {
+        const itemId = event.target.dataset.id;
+        const cartItems = getLocalStorage("so-cart");
+        const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
+        localStorage.setItem("so-cart", JSON.stringify(updatedCartItems));
+        renderCartContents();
+    }
+  });
+  }
+  
 }
 function onCartPageLoad() {
   // Get cart items from local storage
