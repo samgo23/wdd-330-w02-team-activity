@@ -5,10 +5,9 @@
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link rel="stylesheet" href="../css/style.css" />
+    
     <title>Sleep Outside | Checkout</title>
-
-    <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <body>
@@ -21,41 +20,52 @@
       <form id="checkout-form" name="checkout">
         <fieldset>
           <legend>Shipping</legend>
-           <label for="customerName">Customer Name:</label>
-           <input type="text" name="customerName" id="customerName" required>
+          <label for="customerName">Customer Name:</label>
+          <input type="text" name="customerName" id="customerName" required />
 
-           <label for="street">Street</label>
-           <input type="text" name="street" id="street" required>
+          <label for="street">Street</label>
+          <input type="text" name="street" id="street" required />
 
-           <label for="city">City:</label>
-           <input type="text" name="city" id="city" required>
+          <label for="city">City:</label>
+          <input type="text" name="city" id="city" required />
 
-           <label for="state">State:</label>
-           <input type="text" name="state" id="state" required>
+          <label for="state">State:</label>
+          <input type="text" name="state" id="state" required />
 
-           <label for="zip">Zip Code:</label>
-           <input type="number" name="zip" id="zip" required>
+          <label for="zip">Zip Code:</label>
+          <input type="number" name="zip" id="zip" required />
         </fieldset>
-       
+
         <fieldset>
-            <legend>Payment</legend>
-            <label for="creditCardNumber">Credit Card Number:</label>
-            <input type="number" name="creditCardNumber" id="creditCardNumber" required>
+          <legend>Payment</legend>
+          <label for="creditCardNumber">Credit Card Number:</label>
+          <input
+            type="number"
+            name="creditCardNumber"
+            id="creditCardNumber"
+            required
+          />
 
-            <label for="expirationDate">Expiration Date:</label>
-            <input type="date" name="expirationDate" id="expirationDate" required>
+          <label for="expirationDate">Expiration Date:</label>
+          <input
+            type="date"
+            name="expirationDate"
+            id="expirationDate"
+            required
+          />
 
-            <label for="securityCode">Security Code</label>
-            <input type="number" name="securityCode" id="securityCode" required>
+          <label for="securityCode">Security Code</label>
+          <input type="number" name="securityCode" id="securityCode" required />
         </fieldset>
-        
 
         <fieldset class="checkout-summary">
           <legend>Order Summary</legend>
-          
+
           <ul>
             <li>
-              <label for="cartSubtotal">Item Subtotal(<span id="num-items"></span>)</label>
+              <label for="cartSubtotal"
+                >Item Subtotal(<span id="num-items"></span>)</label
+              >
               <p name="cartSubtotal" id="cartSubtotal"></p>
             </li>
             <li>
@@ -71,15 +81,13 @@
               <p id="orderTotal"></p>
             </li>
           </ul>
-        
         </fieldset>
 
-        <input type="submit" value="Checkout">
+        <input type="submit" value="Checkout" id="checkoutSubmit"/>
       </form>
-
-
     </main>
 
     <footer id="main-footer"></footer>
+    <script src="../js/checkout.js" type="module"></script>
   </body>
 </html>
