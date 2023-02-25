@@ -56,7 +56,7 @@ export default class ShoppingCart {
         .insertBefore(div, document.querySelector(this.selector));
     }
   }
-// changes shopping cart item quantities
+  // changes shopping cart item quantities
   changeQuantity() {
     const inputElements = document.querySelectorAll(".cart-quantity-input");
     inputElements.forEach((input, index) => {
@@ -72,7 +72,7 @@ export default class ShoppingCart {
 function onCartPageLoad() {
   // Get cart items from local storage
   let cartItems = getLocalStorage("so-cart");
-  
+
   // Check if there are any items in the cart
   if (cartItems && cartItems.length > 0) {
     // Show the cart footer element

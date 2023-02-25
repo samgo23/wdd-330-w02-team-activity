@@ -14,29 +14,51 @@ function productCardTemplate(product) {
 }
 
 export default class ProductList{
-    constructor(category = "tents", dataSource, listElement) {
-        this.category = category;
-        this.dataSource = dataSource;
-        this.listElement = listElement;
-    }
+  constructor(category = "tents", dataSource, listElement) {
+      this.category = category;
+      this.dataSource = dataSource;
+      this.listElement = listElement;
+      this.sortBy = "name"; // initialize the default sorting order
+  }
 
-    // Filter list of products to select the 4 tents needed:
-    filterByTentsId(list) {
-      //"344YJ" "880RR" "985PR" "989CG"
-      const filteredList = list.filter(prod => prod.Id == "344YJ" || prod.Id == "880RR" 
-      ||  prod.Id == "985PR" || prod.Id == "989CG");
-      return filteredList
-    }
+  async init() {
+    // Fill the title with the category name:
+    document.querySelector(".title").textContent = this.category.charAt(0).toUpperCase() + this.category.slice(1);
+    // Our dataSource will return a Promise...so we can use await to resolve it.
+    const list = await this.dataSource.getData(this.category);
+    // Sort the list based on the default sorting order
+    this.sortList(list);
+    // Render the sorted list
+    renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin");
 
-    async init() {
-        //Fill the title with the category name:
-        document.querySelector(".title").textContent = this.category.charAt(0).toUpperCase() + this.category.slice(1);
-        // our dataSource will return a Promise...so we can use await to resolve it.
-        const list = await this.dataSource.getData(this.category);
+    // Add a toggle button for sorting by name or price
+    const sortToggle = document.createElement("button");
+    sortToggle.textContent = "Sort by Price";
+    sortToggle.addEventListener("click", async () => {
+        if (this.sortBy === "price") {
+            this.sortBy = "name";
+            sortToggle.textContent = "Sort by Name";
+        } else {
+            this.sortBy = "price";
+            sortToggle.textContent = "Sort by Price";
+        }
+        // Clear the rendered product list
+        this.listElement.innerHTML = "";
+        // Fetch the latest product list from the data source
+        const updatedList = await this.dataSource.getData(this.category);
+        // Sort the updated list based on the updated sorting order
+        this.sortList(updatedList);
+        // Re-render the sorted list
+        renderListWithTemplate(productCardTemplate, this.listElement, updatedList, "afterbegin");
+    });
+    this.listElement.before(sortToggle);
+}
 
-        const filteredList = this.filterByTentsId(list);
-        // render the list
-       renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin");
+  sortList(list) {
+      if (this.sortBy === "name") {
+          list.sort((a, b) => a.Name.localeCompare(b.Name));
+      } else {
+          list.sort((a, b) => a.FinalPrice - b.FinalPrice);
       }
-
+  }
 }
