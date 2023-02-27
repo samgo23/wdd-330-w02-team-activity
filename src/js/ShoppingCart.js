@@ -1,7 +1,5 @@
 import { qs, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-
-
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
@@ -48,7 +46,7 @@ export default class ShoppingCart {
         .insertBefore(div, document.querySelector(this.selector));
     }
   }
-// changes shopping cart item quantities
+  // changes shopping cart item quantities
   changeQuantity() {
     const inputElements = document.querySelectorAll(".cart-quantity-input");
     inputElements.forEach((input, index) => {
@@ -70,15 +68,14 @@ export default class ShoppingCart {
         const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
         localStorage.setItem("so-cart", JSON.stringify(updatedCartItems));
         // renderCartContents();
-    }
-  });
+      }
+    });
   }
-  
 }
 // // function onCartPageLoad() {
 //   // Get cart items from local storage
 //   let cartItems = getLocalStorage("so-cart");
-  
+
 //   // Check if there are any items in the cart
 //   if (cartItems && cartItems.length > 0) {
 //     // Show the cart footer element
