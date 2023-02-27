@@ -85,7 +85,11 @@ async function loadTemplate(path) {
   // Render the header & footer:
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
-  cartSuperscript();
+
+  if (JSON.parse(localStorage.getItem('so-cart'))) {
+    cartSuperscript();
+  }
+
 }
 
 // add a superscript numebr over the backpack icon to show how many items are in the cart
