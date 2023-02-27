@@ -4,7 +4,7 @@ function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
-    throw new Error("Bad Response");
+    throw { name: 'servicesError', message: res };
   }
 }
 
@@ -20,7 +20,7 @@ export default class ExternalServices {
     return data.Result;
   }
   async findProductById(id) {
-    const products = await fetch(baseURL + `product/${id.toLowerCase()}`);
+    const products = await fetch(baseURL + `product/${id}`);
     const data = await convertToJson(products);
     return data.Result;
   }

@@ -1,17 +1,5 @@
 import { qs, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-const productList = document.querySelector(".product-list");
-
-productList.addEventListener("click", (event) => {
-  if (event.target.matches(".remove-item")) {
-    const itemId = event.target.dataset.id;
-    const cartItems = getLocalStorage("so-cart");
-    const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
-    localStorage.setItem("so-cart", JSON.stringify(updatedCartItems));
-    renderCartContents();
-  }
-});
-
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
@@ -44,7 +32,9 @@ export default class ShoppingCart {
     if (cartItems != null) {
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
       document.querySelector(this.selector).innerHTML = htmlItems.join("");
+      document.querySelector(".list-total").innerText += ` $${this.total}`;
       this.changeQuantity();
+      // onCartPageLoad();
     } else {
       let div = document.createElement("div");
       let p = document.createElement("p");
@@ -68,7 +58,21 @@ export default class ShoppingCart {
       });
     });
   }
+
+  removeFromCart() {
+    const productList = document.querySelector(".product-list");
+    productList.addEventListener("click", (event) => {
+      if (event.target.matches(".remove-item")) {
+        const itemId = event.target.dataset.id;
+        const cartItems = getLocalStorage("so-cart");
+        const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
+        localStorage.setItem("so-cart", JSON.stringify(updatedCartItems));
+        // renderCartContents();
+      }
+    });
+  }
 }
+
 function onCartPageLoad() {
   // Get cart items from local storage
   let cartItems = getLocalStorage("so-cart");
@@ -78,12 +82,14 @@ function onCartPageLoad() {
     // Show the cart footer element
     qs(".cart-footer").classList.remove("hide");
 
-    // Calculate total of cart items
-    let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
 
-    // Create HTML to display total
-    let totalHTML = `<p class="cart-total">Total: $${total}</p>`;
+//   // Check if there are any items in the cart
+//   if (cartItems && cartItems.length > 0) {
+//     // Show the cart footer element
+//     qs(".cart-footer").classList.remove("hide");
 
+//     // Calculate total of cart items
+//     let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
     // Insert HTML into element
     qs(".cart-footer").innerHTML = totalHTML;
   }
