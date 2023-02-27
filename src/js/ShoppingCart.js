@@ -72,9 +72,16 @@ export default class ShoppingCart {
     });
   }
 }
-// // function onCartPageLoad() {
-//   // Get cart items from local storage
-//   let cartItems = getLocalStorage("so-cart");
+
+function onCartPageLoad() {
+  // Get cart items from local storage
+  let cartItems = getLocalStorage("so-cart");
+
+  // Check if there are any items in the cart
+  if (cartItems && cartItems.length > 0) {
+    // Show the cart footer element
+    qs(".cart-footer").classList.remove("hide");
+
 
 //   // Check if there are any items in the cart
 //   if (cartItems && cartItems.length > 0) {
@@ -83,11 +90,7 @@ export default class ShoppingCart {
 
 //     // Calculate total of cart items
 //     let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
-
-//     // Create HTML to display total
-//     let totalHTML = `<p class="cart-total">Total: $${total}</p>`;
-
-//     // Insert HTML into element
-//     qs(".cart-footer").innerHTML = totalHTML;
-//   }
-// }
+    // Insert HTML into element
+    qs(".cart-footer").innerHTML = totalHTML;
+  }
+}
