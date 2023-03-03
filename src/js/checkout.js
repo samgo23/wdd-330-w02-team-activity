@@ -3,7 +3,7 @@ import CheckoutProcess from "./checkout-process.mjs";
 
 loadHeaderFooter();
 
-const myCheckout = new CheckoutProcess("so-cart", ".checkout-summary");
+const myCheckout = new CheckoutProcess("so-cart");
 myCheckout.init();
 console.log(myCheckout);
 document
