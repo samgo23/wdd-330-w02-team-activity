@@ -2,7 +2,7 @@ import { qs, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
-    <a href="#" class="cart-card__image">
+    <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
       <img
         src="${item.Image}"
         alt="${item.Name}"
@@ -91,6 +91,6 @@ function onCartPageLoad() {
 //     // Calculate total of cart items
 //     let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
     // Insert HTML into element
-    qs(".cart-footer").innerHTML = totalHTML;
+    //qs(".cart-footer").innerHTML = totalHTML;
   }
 }
