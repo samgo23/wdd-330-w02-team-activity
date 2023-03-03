@@ -8,29 +8,31 @@
 
     <title>Sleep Outside | Admin</title>
 
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script href="../js/admin.mjs" type="module"></script>
   </head>
 
   <body>
     <header class="divider" id="main-header"></header>
 
     <main class="divider">
-        <section class="Login">
-            <h2>Log In</h2>
-        </section>
-        <form id="login-form" name ="login">
-            <fieldset>
-                <legend>Log In</legend>
-                <label for="email-input">E-mail:</label>
-                <input type="text" name="email-input" id="email" required />
+      <section class="Login">
+        <h2>Log In</h2>
+      </section>
+      <form id="login-form" name="login">
+        <fieldset>
+          <legend>Log In</legend>
+          <label for="email-input">E-mail:</label>
+          <input type="text" name="email-input" id="email" required />
 
-                <label for="password-input">Password:</label>
-                <input type="text" name="password-input" id="password" required />
-            </fieldset>
+          <label for="password-input">Password:</label>
+          <input type="text" name="password-input" id="password" required />
+        </fieldset>
 
-            <input type="submit" value="Log In" />
-        </form>
+        <button type="submit" id="loginButton">Log In</button>
+      </form>
     </main>
     <footer id="main-footer"></footer>
+    
   </body>
 </html>
