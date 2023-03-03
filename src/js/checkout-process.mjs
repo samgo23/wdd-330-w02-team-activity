@@ -14,6 +14,8 @@ function formDataToJSON(form) {
   return convertedJSON;
 }
 
+// Take the items currently stored in the cart (localStorage) and returns
+// them in a simplified form:
 function packageItems(items) {
     const simplifiedItems = items.map((item) => {
       console.log(item);
