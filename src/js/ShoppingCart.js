@@ -28,6 +28,17 @@ export default class ShoppingCart {
     this.quantity = 1;
   }
 
+  async init() {
+    const list = getLocalStorage(this.key);
+    this.calculateListTotal(list);
+    this.renderCartContents();
+
+    if (cart.total > 0) {
+      console.log(document.querySelector(".list-footer"))
+      document.querySelector(".list-footer").classList.remove("hide");
+    }
+  }
+
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
 
