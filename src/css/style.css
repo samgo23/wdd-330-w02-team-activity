@@ -252,6 +252,21 @@ button {
   width: 25%;
   font-size: 1em;
 }
+.alert span{
+  cursor: pointer;
+}
+.alert {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: var(--primary-color);
+  border: 1px solid darkorange;
+}
+.alert > p {
+  margin: 0;
+}
 /* End Checkout form styles */
 
 @media screen and (min-width: 500px) {

@@ -86,7 +86,7 @@ async function loadTemplate(path) {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 
-  if (JSON.parse(localStorage.getItem('so-cart'))) {
+  if (JSON.parse(localStorage.getItem("so-cart"))) {
     cartSuperscript();
   }
 
@@ -94,8 +94,8 @@ async function loadTemplate(path) {
 
 // add a superscript numebr over the backpack icon to show how many items are in the cart
 function cartSuperscript() {
-  // Retrieve the value saved in the 'so-cart' key of the local storage
-  const cartValue = localStorage.getItem('so-cart');
+  // Retrieve the value saved in the "so-cart" key of the local storage
+  const cartValue = localStorage.getItem("so-cart");
 
   // Convert the retrieved value to an array of objects
   const cartArray = JSON.parse(cartValue);
@@ -103,9 +103,39 @@ function cartSuperscript() {
   // Get the length of the array to determine the number of items in the cart
   const numInCart = cartArray.length;
 
-  // Find the HTML element with the id 'numberInCart'
-  const numInCartElement = document.getElementById('numberInCart');
+  // Find the HTML element with the id "numberInCart"
+  const numInCartElement = document.getElementById("numberInCart");
 
   // Set the innerHTML of the element to the value retrieved from local storage
   numInCartElement.innerHTML = numInCart;
+}
+
+// Create an alert messege on the top of the main:
+export function alertMessage(message, scroll = true) {
+  // Create element to hold the alert:
+  const alert = document.createElement("div");
+  // Add a class to style the alert:
+  alert.classList.add("alert");
+  // Set the contents:
+  alert.innerHTML = (`<p>${message}</p><span>X</span>`);
+
+  // add a listener to the alert to see if they clicked on the X
+  // if they did then remove the child
+  alert.addEventListener("click", function(e) {
+      if ( e.target.tagName == "SPAN") {
+        main.removeChild(this);
+      }
+  });
+  // Add the alert to the top of main
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  
+  if (scroll) {
+    window.scrollTo(0,0);
+  }
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
