@@ -1,6 +1,6 @@
 import { qs, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-function cartItemTemplate(item) {
+function cartItemTemplate(item, quantity) {
   const newItem = `<li class="cart-card divider">
     <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
       <img
@@ -12,7 +12,7 @@ function cartItemTemplate(item) {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">Quantity: <input min=1 type="number" value="${item.Quantity}" class="cart-quantity-input"></p>
+    <p class="cart-card__quantity">Quantity: <input min=1 type="number" value="${quantity + 1}" class="cart-quantity-input"></p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
     <span class="remove-item" data-id="${item.Id}">X</span>
   </li>`;
@@ -24,13 +24,15 @@ export default class ShoppingCart {
   constructor(key, parentSelector) {
     this.key = key;
     this.selector = parentSelector;
+    this.total = 0;
+    this.quantity = 1;
   }
 
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
 
     if (cartItems != null) {
-      const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+      const htmlItems = cartItems.map((item) => cartItemTemplate(item, this.quantity));
       document.querySelector(this.selector).innerHTML = htmlItems.join("");
       document.querySelector(".list-total").innerText += ` $${this.total}`;
       this.changeQuantity();
@@ -46,6 +48,13 @@ export default class ShoppingCart {
         .insertBefore(div, document.querySelector(this.selector));
     }
   }
+
+  // Calculate cart total:
+  calculateListTotal(list) {
+    const amounts = list.map((item) => item.FinalPrice);
+    this.total = amounts.reduce((sum, item) => sum + item);
+  }
+
   // changes shopping cart item quantities
   changeQuantity() {
     const inputElements = document.querySelectorAll(".cart-quantity-input");
