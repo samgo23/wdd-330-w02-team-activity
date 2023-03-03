@@ -217,6 +217,11 @@ button {
   display: none;
 }
 
+.list-total {
+  text-align: right;
+  font-weight: bold;
+}
+
 /* Category Grid in Home Page */
 .category-grid {
   display: grid;
