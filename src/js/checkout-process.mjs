@@ -50,7 +50,7 @@ constructor(key){
         itemNumElement.innerText = this.list.length;
         let amounts = this.list.map((item) => item.FinalPrice);
         this.itemTotal = amounts.reduce((sum, item) => sum + item);
-        summaryElement.innerText = "$" + this.itemTotal;
+        summaryElement.innerText = "$" + parseFloat(this.itemTotal).toFixed(2);
     }
 
     calculateOrderTotal(){
