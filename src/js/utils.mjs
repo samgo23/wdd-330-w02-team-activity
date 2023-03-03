@@ -110,7 +110,7 @@ function cartSuperscript() {
   numInCartElement.innerHTML = numInCart;
 }
 
-// Alert message for form incorrect inputs:
+// Create an alert messege on the top of the main:
 export function alertMessage(message, scroll = true) {
   // Create element to hold the alert:
   const alert = document.createElement("div");
