@@ -14,6 +14,8 @@ function formDataToJSON(form) {
   return convertedJSON;
 }
 
+// Take the items currently stored in the cart (localStorage) and returns
+// them in a simplified form:
 function packageItems(items) {
     const simplifiedItems = items.map((item) => {
       console.log(item);
@@ -28,9 +30,8 @@ function packageItems(items) {
   }
 
 export default class CheckoutProcess {
-constructor(key, outputSelector){
+constructor(key){
     this.key = key;
-    this.outputSelector = outputSelector;
     this.list = [];
     this.itemTotal = 0;
     this.shipping = 0;
@@ -41,18 +42,17 @@ constructor(key, outputSelector){
     init(){
         this.list = getLocalStorage(this.key);
         this.calculateItemSummary();
+        this.calculateOrderTotal();
     }
 
     calculateItemSummary(){
         // calculate and display the total amount of the items in the cart, and the number of items.
-        let summaryElement = document.querySelector('#cartSubtotal'
-        );
-        const itemNumElement = document.querySelector("#num-items"
-        );
+        let summaryElement = document.querySelector("#cartSubtotal");
+        const itemNumElement = document.querySelector("#num-items");
         itemNumElement.innerText = this.list.length;
         let amounts = this.list.map((item) => item.FinalPrice);
         this.itemTotal = amounts.reduce((sum, item) => sum + item);
-        summaryElement.innerText = '$' + this.itemTotal;
+        summaryElement.innerText = "$" + parseFloat(this.itemTotal).toFixed(2);
     }
 
     calculateOrderTotal(){
@@ -71,11 +71,9 @@ constructor(key, outputSelector){
     }
 
     displayOrderTotals(){
-        const shipping = document.querySelector(this.outputSelector + " #shipping");
-        const tax = document.querySelector(this.outputSelector + " #tax");
-        const orderTotal = document.querySelector(
-        this.outputSelector + " #orderTotal"
-        );
+        const shipping = document.querySelector("#shipping");
+        const tax = document.querySelector("#tax");
+        const orderTotal = document.querySelector("#orderTotal");
         shipping.innerText = "$" + this.shipping;
         tax.innerText = "$" + this.tax;
         orderTotal.innerText = "$" + this.orderTotal;

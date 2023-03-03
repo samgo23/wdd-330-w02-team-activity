@@ -206,10 +206,20 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+
+.cart-quantity-input {
+  max-width: 70%;
+}
+
 /*cart total*/
 
 .hide {
   display: none;
+}
+
+.list-total {
+  text-align: right;
+  font-weight: bold;
 }
 
 /* Category Grid in Home Page */
@@ -217,6 +227,32 @@ button {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
+
+/* Start Checkout form styles */
+#checkout-form {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+#checkout-form fieldset {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-summary > ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+.checkout-summary li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.checkout-summary input {
+  width: 25%;
+  font-size: 1em;
+}
+/* End Checkout form styles */
 
 @media screen and (min-width: 500px) {
   body {

@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/style.css" />
 
+    <script src="../js/checkout.js" type="module" defer></script>
+
     <title>Sleep Outside | Checkout</title>
   </head>
 
@@ -63,9 +65,7 @@
 
           <ul>
             <li>
-              <label for="cartSubtotal"
-                >Item Subtotal(<span id="num-items"></span>)</label
-              >
+              <label for="cartSubtotal">Item Subtotal (<span id="num-items"></span>)</label>
               <p name="cartSubtotal" id="cartSubtotal"></p>
             </li>
             <li>
@@ -83,7 +83,7 @@
           </ul>
         </fieldset>
         
-        <input type="submit" value="Checkout" />
+        <button type="submit" id="checkoutSubmit">Checkout</button>
         
       </form>
     </main>
