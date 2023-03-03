@@ -43,7 +43,9 @@ export default class ShoppingCart {
     const cartItems = getLocalStorage(this.key);
 
     if (cartItems != null) {
-      const htmlItems = cartItems.map((item) => cartItemTemplate(item, this.quantity));
+      const htmlItems = cartItems.map((item) =>
+        cartItemTemplate(item, this.quantity)
+      );
       qs(this.selector).innerHTML = htmlItems.join("");
       qs(".list-total").innerText += ` $${parseFloat(this.total).toFixed(2)}`;
       this.changeQuantity();
@@ -109,7 +111,7 @@ export default class ShoppingCart {
 
 //     // Calculate total of cart items
 //     let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
-    // Insert HTML into element
-    //qs(".cart-footer").innerHTML = totalHTML;
+// Insert HTML into element
+//qs(".cart-footer").innerHTML = totalHTML;
 //   }
 // }
