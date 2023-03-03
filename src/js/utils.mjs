@@ -117,21 +117,25 @@ export function alertMessage(message, scroll = true) {
   // Add a class to style the alert:
   alert.classList.add("alert");
   // Set the contents:
-  alert.appendChild(`<p>${message}</p>`);
-  const closeAlert = `<a>X</a>`;
-  alert.appendChild(closeAlert);
+  alert.innerHTML = (`<p>${message}</p><span>X</span>`);
+
   // add a listener to the alert to see if they clicked on the X
   // if they did then remove the child
   alert.addEventListener("click", function(e) {
-      if( e.target.InnerText == "X") {
+      if ( e.target.tagName == "SPAN") {
         main.removeChild(this);
       }
-  })
+  });
   // Add the alert to the top of main
   const main = document.querySelector("main");
   main.prepend(alert);
   
-  if(scroll)
+  if (scroll) {
     window.scrollTo(0,0);
+  }
+}
 
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
