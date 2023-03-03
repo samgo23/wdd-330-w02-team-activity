@@ -206,6 +206,11 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+
+.cart-quantity-input {
+  max-width: 70%;
+}
+
 /*cart total*/
 
 .hide {
