@@ -19,6 +19,7 @@ document
   if (chk_status) {
     myCheckout.checkout();
   }
+  // clear localSotrage content:
   localStorage.clear();
   window.location.href = "success.html";
 });
