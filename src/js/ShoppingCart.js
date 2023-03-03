@@ -29,14 +29,14 @@ export default class ShoppingCart {
   }
 
   async init() {
-    const list = getLocalStorage(this.key);
-    this.calculateListTotal(list);
-    this.renderCartContents();
+    const cartItems = getLocalStorage(this.key);
 
-    if (cart.total > 0) {
-      console.log(document.querySelector(".list-footer"))
+    if (cartItems != null) {
+      this.calculateListTotal(cartItems);
       document.querySelector(".list-footer").classList.remove("hide");
     }
+
+    this.renderCartContents();
   }
 
   renderCartContents() {
@@ -44,8 +44,8 @@ export default class ShoppingCart {
 
     if (cartItems != null) {
       const htmlItems = cartItems.map((item) => cartItemTemplate(item, this.quantity));
-      document.querySelector(this.selector).innerHTML = htmlItems.join("");
-      document.querySelector(".list-total").innerText += ` $${this.total}`;
+      qs(this.selector).innerHTML = htmlItems.join("");
+      qs(".list-total").innerText += ` $${this.total}`;
       this.changeQuantity();
       // onCartPageLoad();
     } else {
@@ -93,15 +93,14 @@ export default class ShoppingCart {
   }
 }
 
-function onCartPageLoad() {
-  // Get cart items from local storage
-  let cartItems = getLocalStorage("so-cart");
+// function onCartPageLoad() {
+//   // Get cart items from local storage
+//   let cartItems = getLocalStorage("so-cart");
 
-  // Check if there are any items in the cart
-  if (cartItems && cartItems.length > 0) {
-    // Show the cart footer element
-    qs(".cart-footer").classList.remove("hide");
-
+//   // Check if there are any items in the cart
+//   if (cartItems && cartItems.length > 0) {
+//     // Show the cart footer element
+//     qs(".cart-footer").classList.remove("hide");
 
 //   // Check if there are any items in the cart
 //   if (cartItems && cartItems.length > 0) {
@@ -112,5 +111,5 @@ function onCartPageLoad() {
 //     let total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
     // Insert HTML into element
     //qs(".cart-footer").innerHTML = totalHTML;
-  }
-}
+//   }
+// }
