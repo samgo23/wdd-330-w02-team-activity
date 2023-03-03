@@ -45,7 +45,7 @@ export default class ShoppingCart {
     if (cartItems != null) {
       const htmlItems = cartItems.map((item) => cartItemTemplate(item, this.quantity));
       qs(this.selector).innerHTML = htmlItems.join("");
-      qs(".list-total").innerText += ` $${this.total}`;
+      qs(".list-total").innerText += ` $${parseFloat(this.total).toFixed(2)}`;
       this.changeQuantity();
       // onCartPageLoad();
     } else {
