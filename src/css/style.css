@@ -94,6 +94,21 @@ button {
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
+#signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  max-width: max-content;
+}
+
+#signup-btn {
+  float: left;
+}
+
+#copyright {
+  float: right;
+}
 /* End utility classes */
 
 /* Cart icon styles */
