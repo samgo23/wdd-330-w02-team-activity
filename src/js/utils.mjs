@@ -89,7 +89,7 @@ async function loadTemplate(path) {
   if (JSON.parse(localStorage.getItem("so-cart"))) {
     cartSuperscript();
   }
-
+  newsletter();
 }
 
 // add a superscript numebr over the backpack icon to show how many items are in the cart
@@ -108,6 +108,31 @@ function cartSuperscript() {
 
   // Set the innerHTML of the element to the value retrieved from local storage
   numInCartElement.innerHTML = numInCart;
+}
+
+function newsletter() {
+  // Get the button and the sign-up form elements
+  const signupBtn = document.getElementById("signup-btn");
+  const signupForm = document.getElementById("signup-form");
+
+  // Show the sign-up form when the button is clicked
+  signupBtn.addEventListener("click", function() {
+    signupBtn.style.display = "none";
+    signupForm.style.display = "block";
+  });
+
+  // Handle form submission
+  const form = document.querySelector("form");
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const email = document.getElementById("email").value;
+    // Send the email address to the server to sign up for the newsletter
+    // You would need to implement this server-side functionality yourself
+    console.log("Signed up with email:", email);
+    // Hide the form after submission
+    signupForm.style.display = "none";
+  });
+
 }
 
 // Create an alert messege on the top of the main:
