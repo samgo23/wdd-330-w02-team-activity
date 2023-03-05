@@ -1,8 +1,7 @@
 import { getLocalStorage } from "./utils.mjs";
 
 export default class ExternalServices {
-    constructor(outputselector) {
-        this.mainElement = document.querySelector(outputSelector);
+    constructor() {
         this.token = null;
         this.services = new ExternalServices();
     }
@@ -27,10 +26,35 @@ export default class ExternalServices {
             const password = document.querySelector("#password").value;
             this.login({email, password}) });
     }
+
+    async showOrders() {
+        try {
+            // Retrieve token:
+            const orders = await this.services.getOrders(this.token);
+
+            // Add orders HTML template:
+            document.querySelector(".Orders").innerHTML = orderHTML();
+
+            document.querySelector("#orders tbody").innerHTML = orders.map(
+                (order) =>
+                `<tr>
+                    <td>${order.id}</td>
+                    <td>${new Date(order.orderDate).toLocaleDateString("en-US")}</td>
+                    <td>${order.items.length}</td>
+                    <td>${order.orderTotal}</td>
+                </tr>`
+            )
+            .join("");
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
+// Create the login form HTML template:
 function loginFormHTML() {
-    return `<form id="login-form name="login">
+    return `<h2>Log In</h2>
+            <form id="login-form name="login">
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" id="email" required>
 
@@ -39,4 +63,15 @@ function loginFormHTML() {
 
                 <button type="submit" id="login-submit">Log In</button>
             </form>`;
+}
+
+// Create the orders HTML template:
+function orderHTML() {
+    return `<h2>Current Oreders </h2>
+            <table id="orders>
+                <thead>
+                    <tr><th>Id</th><th>Date</th><th>#Items</th><th>Total</th>
+                </thead>
+                <tbody class="order-body"></tbody>
+            </table>`;
 }
