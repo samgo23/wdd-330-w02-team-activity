@@ -10,8 +10,8 @@ document
   .querySelector("#zip")
   .addEventListener("blur", () => myCheckout.calculateOrderTotal());
 
-  // listening for click on the button
-  document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
+// listening for click on the button
+document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
   e.preventDefault();
   // Check form validity (no empty input fields):
   var myForm = document.forms[0];
