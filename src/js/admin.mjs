@@ -1,3 +1,6 @@
+import ExternalServices from "./ExternalServices.mjs";
+import { alertMessage } from "./utils.mjs";
+
 export default class Admin {
     constructor() {
         this.token = null;
@@ -14,7 +17,7 @@ export default class Admin {
         }
     }
 
-    showLogin() {
+    async showLogin() {
         // Add HTML for the login form:
         document.querySelector(".Login").innerHTML = loginFormHTML();            
 
