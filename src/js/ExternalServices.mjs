@@ -35,4 +35,18 @@ export default class ExternalServices {
     };
     return await fetch(baseURL + `checkout/`, options).then(convertToJson);
   }
+
+  async loginRequest(creds) {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(creds),
+    };
+    const response = await fetch(baseURL + "login", options).then(
+      convertToJson
+    );
+    return response.accessToken;
+  }
 }
