@@ -57,6 +57,6 @@ export default class ExternalServices {
         "Authorization": `Bearer ${token}`,
       },
     };
-    return await fetch(baseURL + `checkout/`, options).then(convertToJson);
+    return await fetch(baseURL + "orders", options).then(convertToJson);   
   }
 }
