@@ -49,4 +49,14 @@ export default class ExternalServices {
     );
     return response.accessToken;
   }
+
+  async getOrders(token) {
+    const options = {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    };
+    return await fetch(baseURL + `checkout/`, options).then(convertToJson);
+  }
 }
