@@ -1,5 +1,3 @@
-import { getLocalStorage } from "./utils.mjs";
-
 export default class ExternalServices {
     constructor() {
         this.token = null;
