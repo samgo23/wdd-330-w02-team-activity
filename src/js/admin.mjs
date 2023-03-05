@@ -1,4 +1,4 @@
-export default class ExternalServices {
+export default class Admin {
     constructor() {
         this.token = null;
         this.services = new ExternalServices();
